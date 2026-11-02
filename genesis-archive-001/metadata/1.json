@@ -1,0 +1,16 @@
+{
+  "name": "GENESIS ARCHIVE #001 — The Human Continuity NFT",
+  "description": "A one-of-one AI-assisted digital artwork conceived as the visual frontispiece for a proposed Human Continuity Archive. This token represents ownership of the ERC-721 token only. It does not represent shares, investment returns, ownership of a fund or organization, governance rights, or a claim on future projects.",
+  "image": "ipfs://REPLACE_WITH_ARTWORK_CID",
+  "attributes": [
+    {"trait_type": "Edition", "value": "1/1"},
+    {"trait_type": "Medium", "value": "AI-assisted digital artwork"},
+    {"trait_type": "Year", "value": 2026},
+    {"trait_type": "Network", "value": "Ethereum"},
+    {"trait_type": "Standard", "value": "ERC-721"}
+  ],
+  "properties": {
+    "artwork_sha256": "087d6986e5e9e972e854ad6f2558ad26e2ad244a98a6e60e25a677fb9286b5bc",
+    "edition_scope": "One token in this contract; unrelated copies on other systems cannot be technically excluded."
+  }
+}

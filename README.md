@@ -24,7 +24,7 @@ docker compose up --build
 Open http://localhost:8000; API docs: /docs. Without Docker: `pip install -r requirements.txt && uvicorn app.main:app --reload` (SQLite default; Compose uses PostgreSQL 16).
 
 ## Deploy on Render
-The root `Dockerfile` is configured to unpack the source archive and build the FastAPI app. Create a Docker Web Service from this repository, attach a managed PostgreSQL database, and set `DATABASE_URL` and a unique `SECRET_KEY`. The service listens on port 8000. Never use the development secret in production.
+The root Dockerfile is configured to unpack the source archive and build the FastAPI app. Create a Docker Web Service from this repository, attach a managed PostgreSQL database, and set DATABASE_URL and a unique SECRET_KEY. The service listens on port 8000. Never use the development secret in production.
 
 ## Verification
 Python syntax, API integration test and JavaScript syntax checks passed in the build environment. Docker runtime was not verified there. Public hosting requires the deployment steps above.
@@ -33,3 +33,8 @@ Python syntax, API integration test and JavaScript syntax checks passed in the b
 Before public launch: strong unique SECRET_KEY, managed PostgreSQL with backups/PITR, HTTPS, CORS/trusted-host allowlists, rate limiting, email verification/password recovery, migrations, observability, security testing, privacy/terms/age/accessibility review and human moderation. This MVP is not independently security-audited.
 
 Credits have no cash value and cannot be transferred or redeemed. Collectibles are off-chain and non-transferable. NPC dialogue uses a local deterministic persona engine; no external LLM or blockchain is connected.
+
+## GENESIS ARCHIVE #001
+**Live presentation:** https://genesis-archive-001.onrender.com  
+**Source, smart contract and release documentation:** https://github.com/MrSystemC/digital-underworld/tree/genesis-archive-001/genesis-archive-001  
+**Draft review:** https://github.com/MrSystemC/digital-underworld/pull/1

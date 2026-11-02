@@ -1,0 +1,16 @@
+{
+  "asset": "GENESIS_ARCHIVE_001_MASTER.png",
+  "project": "GENESIS ARCHIVE #001",
+  "creation_date": "2026-11-02",
+  "dimensions_px": [1254, 1254],
+  "format": "PNG",
+  "color_mode": "RGB",
+  "sha256": "087d6986e5e9e972e854ad6f2558ad26e2ad244a98a6e60e25a677fb9286b5bc",
+  "production_method": "AI-assisted image generation commissioned for this project",
+  "edition_intent": "1/1 within the dedicated GenesisArchive001 ERC-721 contract",
+  "limitations": [
+    "Process record only; not third-party certification or a legal opinion.",
+    "Does not prove that no similar image or copy exists elsewhere.",
+    "The contract can enforce one token only within its own deployment."
+  ]
+}
