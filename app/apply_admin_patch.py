@@ -30,12 +30,22 @@ s=s.replace('''def initialize_db():
     Base.metadata.create_all(engine)
 ''','''def initialize_db():
     Base.metadata.create_all(engine)
-    # Safe additive migration for existing SQLite/PostgreSQL databases.
     from sqlalchemy import inspect
     if "is_suspended" not in {c["name"] for c in inspect(engine).get_columns("users")}:
         with engine.begin() as conn:
             conn.exec_driver_sql("ALTER TABLE users ADD COLUMN is_suspended BOOLEAN NOT NULL DEFAULT FALSE")
 ''',1)
+old_list='''    return [{"id": x.id, "handle": x.handle, "email": x.email, "role": x.role,
+             "reputation": x.reputation, "credits": x.credits} for x in xs]
+'''
+new_list='''    return [{"id": x.id, "handle": x.handle, "email": x.email, "role": x.role,
+             "reputation": x.reputation, "credits": x.credits,
+             "is_suspended": x.is_suspended, "faction_id": x.faction_id,
+             "created_at": x.created_at.isoformat() if hasattr(x, "created_at") and x.created_at else None} for x in xs]
+'''
+s=s.replace(old_list,new_list,1)
 if "from .admin_routes import router as admin_router" not in s:
-    s += "\n\nfrom .admin_routes import router as admin_router\napp.include_router(admin_router)\n"
+    s += "\nfrom .admin_routes import router as admin_router\napp.include_router(admin_router)\n"
+if "from .admin_extra import router as admin_extra_router" not in s:
+    s += "from .admin_extra import router as admin_extra_router\napp.include_router(admin_extra_router)\n"
 p.write_text(s,encoding="utf-8")
