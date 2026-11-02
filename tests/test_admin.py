@@ -1,3 +1,7 @@
+import os
+from pathlib import Path
+os.environ["DATABASE_URL"]="sqlite:///./test_underworld.sqlite"
+os.environ["SECRET_KEY"]="admin-test-secret-key-with-sufficient-entropy"
 from fastapi.testclient import TestClient
 from app.main import app, SessionLocal, User
 
