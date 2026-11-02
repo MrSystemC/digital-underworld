@@ -1,10 +1,10 @@
-import os, hmac
-from fastapi import APIRouter, Depends, HTTPException, Header
+import os
+from fastapi import APIRouter, Depends, HTTPException
 from fastapi.responses import HTMLResponse
 from pydantic import BaseModel, Field
 from sqlalchemy import select, desc, func
 from sqlalchemy.orm import Session
-from .main import User, Post, Proposal, Report, Asset, AssetClaim, LedgerEntry, NPC, ChatMessage, AuditEvent, get_db, admin_user, moderator_user, audit
+from .main import User, Post, Proposal, Report, Asset, AssetClaim, LedgerEntry, NPC, ChatMessage, AuditEvent, get_db, current_user, admin_user, moderator_user, audit
 router=APIRouter()
 @router.get("/admin",response_class=HTMLResponse)
 def admin_panel(): return open("static/admin.html",encoding="utf-8").read()
@@ -13,16 +13,16 @@ def overview(_:User=Depends(moderator_user),db:Session=Depends(get_db)):
  return {"members":db.query(User).count(),"moderators":db.query(User).filter(User.role=="moderator").count(),"administrators":db.query(User).filter(User.role.in_(["administrator","super_admin"])).count(),"posts":db.query(Post).count(),"proposals":db.query(Proposal).count(),"open_reports":db.query(Report).filter(Report.status=="open").count(),"assets":db.query(Asset).count(),"npc_messages":db.query(ChatMessage).count()}
 class RoleUpdate(BaseModel): role:str=Field(pattern="^(member|moderator|administrator|super_admin)$")
 class ReportStatusUpdate(BaseModel): status:str=Field(pattern="^(open|reviewing|resolved|dismissed)$")
-class BootstrapRequest(BaseModel): email:str=Field(min_length=5,max_length=254)
+@router.get("/api/admin/bootstrap/status")
+def bootstrap_status(user:User=Depends(current_user),db:Session=Depends(get_db)):
+ available=not bool(db.scalar(select(User.id).where(User.role=="super_admin").limit(1)))
+ eligible=available and user.email.lower()==os.getenv("FIRST_SUPER_ADMIN_EMAIL","").strip().lower()
+ return {"available":available,"eligible":eligible}
 @router.post("/api/admin/bootstrap/first-super-admin")
-def bootstrap_first_admin(payload:BootstrapRequest,x_admin_bootstrap_token:str|None=Header(default=None),db:Session=Depends(get_db)):
- secret=os.getenv("ADMIN_BOOTSTRAP_TOKEN","")
- if not secret or not x_admin_bootstrap_token or not hmac.compare_digest(secret,x_admin_bootstrap_token):
-  raise HTTPException(403,"Invalid bootstrap credential")
- if db.scalar(select(User.id).where(User.role=="super_admin").limit(1)):
-  raise HTTPException(409,"First-admin bootstrap has already been used")
- user=db.scalar(select(User).where(User.email==payload.email.strip().lower()))
- if not user: raise HTTPException(404,"Register this email before bootstrap")
+def bootstrap_first_admin(user:User=Depends(current_user),db:Session=Depends(get_db)):
+ target=os.getenv("FIRST_SUPER_ADMIN_EMAIL","").strip().lower()
+ if not target or user.email.lower()!=target: raise HTTPException(403,"This account is not authorized for first-admin setup")
+ if db.scalar(select(User.id).where(User.role=="super_admin").limit(1)): raise HTTPException(409,"First-admin bootstrap has already been used")
  user.role="super_admin"
  db.add(AuditEvent(actor_id=user.id,action="bootstrap.first_super_admin",object_type="user",object_id=user.id))
  db.commit()
