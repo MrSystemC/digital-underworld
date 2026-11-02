@@ -3,14 +3,38 @@
   "description": "A one-of-a-kind AI-assisted digital artwork conceived as the visual frontispiece for a proposed Human Continuity Archive. The hourglass holds Earth as memory and a regenerative future as possibility; its surrounding symbols reference health, knowledge, clean energy, ecology, cooperation, justice and exploration. This token represents ownership of the ERC-721 token only. It does not represent shares, investment returns, ownership of a fund or organization, governance rights, or a claim on future projects. The artwork is AI-assisted; copyright and commercial-use rights are not transferred by token ownership unless a separate written agreement says so.",
   "image": "ipfs://bafybeib6huv4ptfmmjmgwhmhvmujqflmxm4hzlamujnnii5lkujopa4zia",
   "attributes": [
-    {"trait_type": "Edition", "value": "1/1"},
-    {"trait_type": "Series", "value": "Human Continuity"},
-    {"trait_type": "Project", "value": "Genesis Archive"},
-    {"trait_type": "Medium", "value": "AI-assisted digital artwork"},
-    {"trait_type": "Year", "value": 2026},
-    {"trait_type": "Theme", "value": "Human continuity"},
-    {"trait_type": "Network", "value": "Ethereum"},
-    {"trait_type": "Standard", "value": "ERC-721"}
+    {
+      "trait_type": "Edition",
+      "value": "1/1"
+    },
+    {
+      "trait_type": "Series",
+      "value": "Human Continuity"
+    },
+    {
+      "trait_type": "Project",
+      "value": "Genesis Archive"
+    },
+    {
+      "trait_type": "Medium",
+      "value": "AI-assisted digital artwork"
+    },
+    {
+      "trait_type": "Year",
+      "value": 2026
+    },
+    {
+      "trait_type": "Theme",
+      "value": "Human continuity"
+    },
+    {
+      "trait_type": "Network",
+      "value": "Ethereum"
+    },
+    {
+      "trait_type": "Standard",
+      "value": "ERC-721"
+    }
   ],
   "properties": {
     "provenance": "See docs/PROVENANCE_AND_RIGHTS.md in the release package.",
