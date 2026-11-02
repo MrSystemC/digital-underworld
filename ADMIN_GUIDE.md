@@ -21,3 +21,14 @@ curl -X POST https://digital-underworld.onrender.com/api/admin/bootstrap/first-s
 4. Sign in at `/admin`.
 
 The bootstrap token is stored only as a Render environment secret; do not commit it, post it publicly, or reuse it. Role changes, report status changes and post visibility changes are audited. Use HTTPS and persistent managed PostgreSQL before inviting real users.
+
+## Expanded management functions (v1.2)
+- Member directory: edit handle/email, change role, assign faction, suspend/restore access.
+- Reputation: apply positive or negative integer adjustments with mandatory reason and audit event.
+- World credits: adjust game balance with mandatory reason and an append-only ledger entry; balance cannot become negative.
+- Factions: create and edit faction metadata.
+- Districts: create and edit map coordinates, lore and exploration reward.
+- AI personas: create and edit NPC identity, role, persona and greeting.
+- Collectibles: create and edit off-chain collectible metadata and rarity.
+- Governance: close proposal voting.
+- All privileged management APIs are server-side protected; moderators remain limited to reports and chronicle moderation.
