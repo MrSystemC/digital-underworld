@@ -14,7 +14,7 @@ A fictional international social-simulation platform. The complete source packag
 
 This is a fictional community simulation only. It does not support real-world criminal governance, coercion, extortion, violence, illicit trade or criminal coordination.
 
-## Run
+## Run locally
 ```bash
 unzip digital-underworld-v1.0.0-mvp.zip
 cd digital-underworld-v2
@@ -23,10 +23,13 @@ docker compose up --build
 ```
 Open http://localhost:8000; API docs: /docs. Without Docker: `pip install -r requirements.txt && uvicorn app.main:app --reload` (SQLite default; Compose uses PostgreSQL 16).
 
+## Deploy on Render
+The root `Dockerfile` is configured to unpack the source archive and build the FastAPI app. Create a Docker Web Service from this repository, attach a managed PostgreSQL database, and set `DATABASE_URL` and a unique `SECRET_KEY`. The service listens on port 8000. Never use the development secret in production.
+
 ## Verification
-Python syntax, API integration test and JavaScript syntax checks passed. Docker runtime was not verified because Docker CLI was unavailable. Public hosting is not configured.
+Python syntax, API integration test and JavaScript syntax checks passed in the build environment. Docker runtime was not verified there. Public hosting requires the deployment steps above.
 
 ## Production hardening
-Before launch: strong unique SECRET_KEY, managed PostgreSQL with backups/PITR, HTTPS, CORS/trusted-host allowlists, rate limiting, email verification/password recovery, migrations, observability, security testing, privacy/terms/age/accessibility review and human moderation. This MVP is not independently security-audited.
+Before public launch: strong unique SECRET_KEY, managed PostgreSQL with backups/PITR, HTTPS, CORS/trusted-host allowlists, rate limiting, email verification/password recovery, migrations, observability, security testing, privacy/terms/age/accessibility review and human moderation. This MVP is not independently security-audited.
 
 Credits have no cash value and cannot be transferred or redeemed. Collectibles are off-chain and non-transferable. NPC dialogue uses a local deterministic persona engine; no external LLM or blockchain is connected.
