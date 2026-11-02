@@ -1,4 +1,4 @@
-import os
+import os, hashlib
 from fastapi import APIRouter, Depends, HTTPException
 from fastapi.responses import HTMLResponse
 from pydantic import BaseModel, Field
@@ -16,12 +16,12 @@ class ReportStatusUpdate(BaseModel): status:str=Field(pattern="^(open|reviewing|
 @router.get("/api/admin/bootstrap/status")
 def bootstrap_status(user:User=Depends(current_user),db:Session=Depends(get_db)):
  available=not bool(db.scalar(select(User.id).where(User.role=="super_admin").limit(1)))
- eligible=available and user.email.lower()==os.getenv("FIRST_SUPER_ADMIN_EMAIL","").strip().lower()
+ eligible=available and hashlib.sha256(user.email.lower().encode()).hexdigest()==os.getenv("FIRST_SUPER_ADMIN_EMAIL_SHA256","")
  return {"available":available,"eligible":eligible}
 @router.post("/api/admin/bootstrap/first-super-admin")
 def bootstrap_first_admin(user:User=Depends(current_user),db:Session=Depends(get_db)):
- target=os.getenv("FIRST_SUPER_ADMIN_EMAIL","").strip().lower()
- if not target or user.email.lower()!=target: raise HTTPException(403,"This account is not authorized for first-admin setup")
+ target_hash=os.getenv("FIRST_SUPER_ADMIN_EMAIL_SHA256","")
+ if not target_hash or hashlib.sha256(user.email.lower().encode()).hexdigest()!=target_hash: raise HTTPException(403,"This account is not authorized for first-admin setup")
  if db.scalar(select(User.id).where(User.role=="super_admin").limit(1)): raise HTTPException(409,"First-admin bootstrap has already been used")
  user.role="super_admin"
  db.add(AuditEvent(actor_id=user.id,action="bootstrap.first_super_admin",object_type="user",object_id=user.id))
