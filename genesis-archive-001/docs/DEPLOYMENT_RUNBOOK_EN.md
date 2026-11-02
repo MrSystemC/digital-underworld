@@ -2,15 +2,16 @@
 
 This sequence includes irreversible actions. Do not proceed to Mainnet until every review gate is complete.
 
-## 1. Pin artwork and metadata
+## 1. IPFS artwork and metadata
 
-1. Upload the original 1254 × 1254 PNG, not the SVG website preview, to an IPFS pinning provider.
-2. Verify its SHA-256 against artwork/PROVENANCE.json.
-3. Record the actual artwork CID.
-4. Set ARTWORK_CID in a private local environment file and run npm run metadata:finalize.
-5. Upload the finalized metadata/1.json as a separate IPFS object and record its actual CID.
-6. Set METADATA_URI to ipfs:// followed by that metadata CID.
-7. Verify both objects through independent IPFS gateways. IPFS content is public by default.
+1. Extract the supplied release ZIP. The original master PNG is in the ZIP; the GitHub source branch contains the contract and documentation.
+2. Place the master file at artwork/GENESIS_ARCHIVE_001_MASTER.png in the source checkout.
+3. Verify its SHA-256: 087d6986e5e9e972e854ad6f2558ad26e2ad244a98a6e60e25a677fb9286b5bc.
+4. The project owner supplied this artwork CID: bafybeib6huv4ptfmmjmgwhmhvmujqflmxm4hzlamujnnii5lkujopa4zia.
+5. Retrieve the CID through at least two independent public IPFS gateways. If it does not resolve or the returned file is not the verified master, re-upload the original PNG with an IPFS pinning provider and use the new CID.
+6. Set ARTWORK_CID in a private local environment file and run npm run metadata:finalize. This verifies the local master hash and updates metadata/1.json.
+7. Upload the finalized metadata/1.json as a separate IPFS object and record its own CID.
+8. Set METADATA_URI to ipfs:// followed by that metadata CID. Verify both image and metadata URIs independently. IPFS content is public by default.
 
 ## 2. Wallet setup
 
@@ -22,7 +23,7 @@ Use a dedicated deployer wallet and a separately controlled royalty receiver. A 
     npm test
     npm run compile
 
-Do not deploy if tests or compilation fail. The preparation environment did not complete dependency installation, so compilation and EVM tests remain outstanding.
+Do not deploy if tests or compilation fail. Dependency installation timed out in the preparation environment, so Solidity compilation and EVM tests remain unverified. The contract has not received an independent audit.
 
 ## 4. Sepolia
 
