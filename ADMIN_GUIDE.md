@@ -8,10 +8,16 @@ Open `/admin`. Sign in with an existing account after assigning its role. All au
 - `moderator`: overview, report queue and chronicle moderation only.
 - `member`: no admin access.
 
-## First super administrator
+## First super administrator (free-hosting compatible)
 1. Register the intended account through the public site.
-2. From a trusted server shell with the production database configured, run: `python -m app.bootstrap_admin your-account@example.com`.
-3. The command refuses if a super administrator already exists and writes an audit event.
+2. Use the one-time endpoint with the bootstrap token supplied by the project owner:
+```bash
+curl -X POST https://digital-underworld.onrender.com/api/admin/bootstrap/first-super-admin \
+  -H "Content-Type: application/json" \
+  -H "X-Admin-Bootstrap-Token: YOUR_ONE_TIME_TOKEN" \
+  -d '{"email":"your-registered-email@example.com"}'
+```
+3. It refuses if a super administrator already exists and writes an audit event. Once successful, the endpoint is permanently disabled by the database role check.
 4. Sign in at `/admin`.
 
-Never expose the bootstrap command as a public HTTP endpoint. Role changes, report status changes and post visibility changes are audited. Use HTTPS and persistent managed PostgreSQL before inviting real users.
+The bootstrap token is stored only as a Render environment secret; do not commit it, post it publicly, or reuse it. Role changes, report status changes and post visibility changes are audited. Use HTTPS and persistent managed PostgreSQL before inviting real users.
