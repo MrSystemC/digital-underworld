@@ -4,11 +4,16 @@
 
 A symbolic digital artwork conceived as the visual frontispiece to a proposed Human Continuity Archive. The hourglass holds Earth as memory above and a regenerative future below; its emblems reference health, knowledge, clean energy, ecology, cooperation, justice and exploration.
 
+## Public presentation
+
+**Live site:** https://genesis-archive-001.onrender.com  
+**Source and review PR:** https://github.com/MrSystemC/digital-underworld/pull/1
+
 ## Release status
 
 **Prepared for review. Not deployed, not minted, not audited, and not listed.** No IPFS CID, contract address, transaction hash, valuation or auction acceptance is claimed.
 
-This source directory includes the ERC-721 contract, scripts, tests, metadata draft, provenance record, release documents and a static preview site. The 1254 × 1254 master PNG and collector dossier PDF are in the separate release archive supplied with the project. The SVG on the website is only a preview, not the master artwork.
+This source directory includes the ERC-721 contract, scripts, tests, metadata draft, provenance record, release documents and a static preview site. The 1254 × 1254 master PNG and collector dossier PDF are in the separate release archive supplied with the project. The live website currently uses a vector preview, not the master artwork.
 
 ## Contract design
 
