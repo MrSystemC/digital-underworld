@@ -1,4 +1,4 @@
-# Validation Report — GENESIS ARCHIVE #001 v1.0
+# Validation Report — GENESIS ARCHIVE #001 v1.1
 
 **Date:** 2 November 2026
 
@@ -6,14 +6,16 @@
 
 | Check | Result | Notes |
 |---|---|---|
-| Master artwork exists | PASS | PNG, 1254 × 1254 px, RGB |
-| Artwork SHA-256 | PASS | Matches provenance and metadata draft |
-| Metadata and provenance JSON parse | PASS | Parsed with Python JSON parser |
+| Master artwork exists | PASS | PNG, 1254 × 1254 px, RGB; 3,285,027 bytes |
+| Artwork SHA-256 | PASS | `087d6986e5e9e972e854ad6f2558ad26e2ad244a98a6e60e25a677fb9286b5bc`; matches provenance |
+| Supplied artwork CID syntax | PASS | CIDv1 Base32; decodes to dag-pb / sha2-256 multihash |
+| Public gateway retrieval for supplied CID | NOT VERIFIED | Gateway endpoints were inaccessible from this preparation environment |
+| Metadata JSON | PASS | Valid JSON; image URI finalized to supplied artwork CID |
 | JavaScript syntax | PASS | node --check on scripts and tests |
-| Artwork hash consistency | PASS | SHA-256 independently recalculated |
-| Metadata finalizer | PARTIAL | Source updated to verify CID format and artwork hash; smoke test pending |
+| Artwork hash consistency | PASS | SHA-256 independently recalculated from local master |
+| Metadata finalizer | PASS | Executed locally; verified artwork hash and wrote IPFS image URI |
 | Collector dossier | PASS | PDF generated and rendered, 4 pages |
-| Website preview | PASS | Static HTML and SVG files exist |
+| Website preview | PASS | Static HTML and SVG preview deployed on Render |
 
 ## Not completed
 
@@ -23,7 +25,7 @@
 | Solidity compilation | NOT RUN | Hardhat and solc dependencies unavailable |
 | Hardhat EVM tests | NOT RUN | Requires successful dependency installation |
 | Independent security audit | NOT DONE | Must be commissioned |
-| IPFS pinning | NOT DONE | Requires a pinning provider account or node |
+| Separate IPFS metadata pinning | NOT DONE | Upload finalized metadata/1.json and record its actual CID |
 | Sepolia deployment and mint | NOT DONE | Requires owner-controlled wallet, RPC and test ETH |
 | Ethereum Mainnet deployment and mint | NOT DONE | Requires final review, owner signature and Mainnet ETH |
 | Marketplace indexing / auction acceptance | NOT DONE | Requires a deployed token and platform review |
