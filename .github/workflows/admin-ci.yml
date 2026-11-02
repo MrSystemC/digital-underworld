@@ -12,9 +12,9 @@ jobs:
           python-version: "3.12"
       - run: sudo apt-get update && sudo apt-get install -y unzip
       - run: unzip -q digital-underworld-v1.0.0-mvp.zip -d /tmp/du
-      - run: cp app/admin_routes.py app/apply_admin_patch.py app/bootstrap_admin.py /tmp/du/digital-underworld-v2/app/
-      - run: cp static/admin.html static/admin.css static/admin.js /tmp/du/digital-underworld-v2/static/
+      - run: cp app/admin_routes.py app/admin_extra.py app/apply_admin_patch.py app/bootstrap_admin.py /tmp/du/digital-underworld-v2/app/
+      - run: cp static/admin.html static/admin.css static/admin.js static/admin-enhancements.js /tmp/du/digital-underworld-v2/static/
       - run: cd /tmp/du/digital-underworld-v2 && python app/apply_admin_patch.py
       - run: cd /tmp/du/digital-underworld-v2 && pip install -r requirements.txt pytest
       - run: cd /tmp/du/digital-underworld-v2 && cp "$GITHUB_WORKSPACE/tests/test_admin.py" tests/test_admin_overlay.py && pytest -q
-      - run: node --check static/admin.js
+      - run: node --check static/admin.js && node --check static/admin-enhancements.js
