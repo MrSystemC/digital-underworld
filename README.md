@@ -34,5 +34,7 @@ Before public launch: strong unique SECRET_KEY, managed PostgreSQL with backups/
 
 Credits have no cash value and cannot be transferred or redeemed. Collectibles are off-chain and non-transferable. NPC dialogue uses a local deterministic persona engine; no external LLM or blockchain is connected.
 
-## Related digital collectible project
-[GENESIS ARCHIVE #001 — source, contract, documentation and preview site](https://github.com/MrSystemC/digital-underworld/tree/genesis-archive-001/genesis-archive-001)
+## GENESIS ARCHIVE #001
+**Live presentation:** https://genesis-archive-001.onrender.com  
+**Source, smart contract and release documentation:** https://github.com/MrSystemC/digital-underworld/tree/genesis-archive-001/genesis-archive-001  
+**Draft review:** https://github.com/MrSystemC/digital-underworld/pull/1
