@@ -1,8 +1,8 @@
 # DIGITAL UNDERWORLD — THE NEW WORLD
 
-**Version 1.1.0 · Six product layers + Admin Control Centre**
+**Version 1.2.0 · Six product layers + expanded Admin Control Centre**
 
-A fictional international social-simulation platform. Core source is packaged in [digital-underworld-v1.0.0-mvp.zip](./digital-underworld-v1.0.0-mvp.zip); the root Docker build overlays the protected admin module and interface.
+A fictional international social-simulation platform. Core source is packaged in [digital-underworld-v1.0.0-mvp.zip](./digital-underworld-v1.0.0-mvp.zip); the root Docker build overlays the admin API and interface.
 
 ## Six stages
 1. **WORLD 2.0** — fictional districts, exploration, factions and discovery rewards.
@@ -13,9 +13,21 @@ A fictional international social-simulation platform. Core source is packaged in
 6. **GLOBAL ACCESS** — responsive web UI, English/Russian interface, accounts and REST API.
 
 ## Admin Control Centre
-Open `/admin`. Role levels: `super_admin`, `administrator`, `moderator`, `member`. The first super administrator must be bootstrapped from a trusted server shell after account registration: `python -m app.bootstrap_admin your-account@example.com`. The bootstrap refuses if a super administrator already exists. See [ADMIN_GUIDE.md](./ADMIN_GUIDE.md).
+Open `/admin`. Roles: `super_admin`, `administrator`, `moderator`, `member`.
 
-The admin UI provides overview, member/role management, report workflow, chronicle visibility, governance review, economy ledger, collectible ownership counts, NPC registry and audit trail. All sensitive endpoints enforce server-side role checks.
+Management includes:
+- Member directory, profile editing, role assignment, faction assignment and account suspension/restoration.
+- Reputation adjustments with a mandatory reason and audit event.
+- World Credits adjustments with mandatory reason and append-only ledger entry.
+- Faction and district creation/editing.
+- AI persona creation/editing.
+- Collectible creation/editing.
+- Proposal voting closure, report workflow and chronicle visibility moderation.
+- Platform statistics, economy ledger, audit trail and ownership counts.
+
+All privileged actions are checked by server-side role dependencies. Moderators are limited to overview, reports and chronicle moderation. Super-admin privileges are protected from non-super-admin changes. See [ADMIN_GUIDE.md](./ADMIN_GUIDE.md).
+
+The initial super-admin activation is account-bound and one-time. The eligible account signs in at `/admin`, receives the activation control only if its email hash matches the Render allowlist and no super-admin exists, then activates using its signed-in session.
 
 This is a fictional community simulation only. It does not support real-world criminal governance, coercion, extortion, violence, illicit trade or criminal coordination.
 
@@ -29,9 +41,7 @@ docker compose up --build
 Open http://localhost:8000; API docs: /docs; admin: /admin.
 
 ## Render deployment
-The root `Dockerfile` unpacks the core source archive, overlays the admin routes/UI, applies the role-guard patch and installs dependencies. Use Docker runtime. Configure a unique strong `SECRET_KEY` and a persistent managed PostgreSQL `DATABASE_URL` before public launch. Do not use SQLite on an ephemeral filesystem for production user data.
+The root `Dockerfile` unpacks the core archive, overlays admin modules and UI, applies the role and suspension schema patch, then installs dependencies. Use Docker runtime. Configure a strong unique `SECRET_KEY` and persistent managed PostgreSQL `DATABASE_URL` before public production use. The currently deployed service still uses temporary SQLite until PostgreSQL is connected.
 
-## Verification and limits
-The six-stage core MVP has passing syntax and API tests. The admin overlay is validated separately with role-based tests. Docker runtime must be verified by the hosted deploy. The platform is not independently security-audited. Add HTTPS, CORS/trusted-host allowlists, rate limits, email verification/password recovery, migrations, backups, observability, security testing, privacy/terms/age/accessibility review and staffed moderation before inviting the public.
-
-Credits have no cash value and cannot be transferred or redeemed. Collectibles are off-chain and non-transferable. NPC dialogue uses a local deterministic persona engine; no external LLM or blockchain is connected.
+## Security and limitations
+This release is an MVP, not an independently audited production service. Add rate limits, email verification/password recovery, token revocation, database migrations, backups, monitoring, penetration testing, privacy/terms/age/accessibility review and staffed moderation before public launch. Credits have no cash value and cannot be transferred or redeemed. Collectibles are off-chain and non-transferable. NPC dialogue is deterministic and local; no external LLM or blockchain is connected.
