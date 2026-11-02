@@ -24,6 +24,7 @@
 | npm dependency installation | BLOCKED | npm install timed out in isolated environment |
 | Solidity compilation | NOT RUN | Hardhat and solc dependencies unavailable |
 | Hardhat EVM tests | NOT RUN | Requires successful dependency installation |
+| GitHub Actions compile/test workflow | BLOCKED BEFORE RUNNER | Jobs were marked failed with no runner assigned, no steps executed and no logs available; this is not a Solidity compile/test result |
 | Independent security audit | NOT DONE | Must be commissioned |
 | Separate IPFS metadata pinning | NOT DONE | Upload finalized metadata/1.json and record its actual CID |
 | Sepolia deployment and mint | NOT DONE | Requires owner-controlled wallet, RPC and test ETH |
