@@ -4,13 +4,14 @@
 
 ## 1. IPFS
 
-1. Выберите pinning-провайдера или собственный IPFS-узел.
-2. Загрузите оригинальный файл artwork/GENESIS_ARCHIVE_001_MASTER.png, а не SVG-превью сайта.
-3. Сверьте SHA-256 с artwork/PROVENANCE.json: 087d6986e5e9e972e854ad6f2558ad26e2ad244a98a6e60e25a677fb9286b5bc.
-4. Сохраните реальный CID изображения.
-5. Локально задайте ARTWORK_CID и запустите npm run metadata:finalize.
-6. Загрузите уже финализированный metadata/1.json отдельно и сохраните его CID.
-7. Проверьте оба URI через независимые IPFS gateway. IPFS по умолчанию публичен.
+1. Скачайте release ZIP из предоставленного комплекта и распакуйте его локально.
+2. В рабочем каталоге genesis-archive-001 создайте папку artwork и скопируйте туда оригинальный файл GENESIS_ARCHIVE_001_MASTER.png из распакованного каталога artwork. GitHub-ветка содержит исходники и документацию; бинарный мастер-файл хранится в отдельном ZIP.
+3. Сверьте SHA-256 файла: 087d6986e5e9e972e854ad6f2558ad26e2ad244a98a6e60e25a677fb9286b5bc.
+4. Выберите pinning-провайдера или собственный IPFS-узел и загрузите оригинальный PNG, а не SVG-превью сайта.
+5. Сохраните реальный CID изображения.
+6. Локально задайте ARTWORK_CID и запустите npm run metadata:finalize.
+7. Загрузите уже финализированный metadata/1.json отдельно и сохраните его CID.
+8. Задайте METADATA_URI=ipfs://<metadata CID>. Проверьте оба URI через независимые IPFS gateway. IPFS по умолчанию публичен.
 
 ## 2. Кошельки и секреты
 
@@ -21,6 +22,8 @@
 
 ## 3. Установка и тестирование
 
+В каталоге genesis-archive-001:
+
     npm install
     npm test
     npm run compile
@@ -29,10 +32,10 @@
 
 ## 4. Sepolia
 
-1. Локально задайте RPC endpoint, ключ тестового кошелька, METADATA_URI и ROYALTY_RECEIVER.
+1. Скопируйте env.template в локальный файл .env, заполните DEPLOYER_KEY, SEPOLIA_RPC_URL, METADATA_URI и ROYALTY_RECEIVER.
 2. Выполните npm run deploy:sepolia.
 3. Сохраните адрес и хэш транзакции. Проверьте chain ID 11155111, имя, символ, owner, metadataURI и royaltyInfo.
-4. После проверки задайте адрес контракта и получателя токена.
+4. После проверки задайте NFT_CONTRACT_ADDRESS и MINT_RECIPIENT.
 5. Выполните npm run mint:sepolia.
 6. Проверьте minted() == true, ownerOf(1), tokenURI(1), невозможность повторного минта и отображение метаданных.
 
