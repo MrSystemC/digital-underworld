@@ -2,22 +2,21 @@
 
 **Prepared:** 3 November 2026  
 **Version:** 1.3  
-**State:** source package and local tests prepared; artwork CID supplied; metadata CID must be repinned; not deployed; not minted; not listed.
+**State:** artwork CID retrieved and hash-checked by project owner; final metadata CID supplied and matches locally calculated raw CID; not deployed; not minted; not listed.
 
 | Work item | State |
 |---|---|
 | Original AI-assisted artwork generated | Complete |
 | Artwork SHA-256 recorded and checked against local master | Complete |
 | Artwork CID supplied by project owner | Received; CIDv1 Base32 syntax validated |
-| Public gateway retrieval of artwork CID | Blocked by HTTP 429 from ipfs.io; try independent gateways |
-| NFT metadata JSON | Final canonical file prepared; 1,740 bytes |
-| Metadata JSON SHA-256 | `36cc5843ee29e5ad8c449c75575af3c5ecc3432cbbb8a5da8ed112396864f0bf` |
-| Previously supplied metadata CID | Does NOT match current JSON bytes; do not use for deployment |
-| New metadata CID | Pending re-upload of final JSON |
+| Artwork fetched from Pinata gateway | Owner reports successful download; SHA-256 matches master and provenance |
+| Final NFT metadata JSON | Finalized and available in release package and GitHub |
+| Metadata CID supplied by project owner | Received; matches calculated CIDv1/raw SHA-256 CID for the final JSON bytes |
+| Metadata gateway retrieval | Not yet independently shown; verify before deployment |
 | ERC-721 / EIP-2981 contract source | Compiles locally; owner reports 19 Solidity files compiled |
 | Hardhat EVM tests | Owner reports 11 passing |
-| npm audit --omit=dev | Owner reports 0 production dependency vulnerabilities |
-| Full npm audit | Not yet reviewed |
+| npm production dependency audit | 0 vulnerabilities reported by owner using `npm audit --omit=dev` |
+| Full npm audit | Pending review; previous install reported 25 issues including 7 high |
 | Deployment and mint scripts | Prepared; not executed |
 | Sepolia test deployment | Pending |
 | Independent contract review | Pending |
@@ -31,24 +30,20 @@
 
 ## Artwork record
 
-Owner-supplied CID: `bafybeib6huv4ptfmmjmgwhmhvmujqflmxm4hzlamujnnii5lkujopa4zia`
+CID: `bafybeib6huv4ptfmmjmgwhmhvmujqflmxm4hzlamujnnii5lkujopa4zia`
 
-Local master PNG: 1254 × 1254 px, 3,285,027 bytes. SHA-256:
+Master PNG: 1254 × 1254 px, 3,285,027 bytes. SHA-256:
 `087d6986e5e9e972e854ad6f2558ad26e2ad244a98a6e60e25a677fb9286b5bc`
 
-The local file hash matches the provenance record. CID syntax was decoded as CIDv1 / dag-pb / sha2-256. The owner's attempt to retrieve it through ipfs.io received HTTP 429; this is gateway rate limiting, not proof that the CID is invalid. Public retrieval through another gateway is still required.
+The project owner retrieved the image from Pinata's gateway and reported that the downloaded file hash matched the expected master hash.
 
 ## Metadata record
 
-Previously supplied CID:
-`bafkreibt6k5sxxaip3j2j5jlw3wwb336amaknjte3j7zhz2keomy2h4gge`
+CID: `bafkreibwzrmeh3rj4wwyyre4ovlvv46f5tbuglf3xcs5vdwrci4wqzhqx4`
 
-The CID embeds raw SHA-256 digest:
-`33f2bb2bdc087ed3a4f52bb6ed60ef7e0300a6a664da7f93e74a23998d1f8631`
-
-Current final metadata JSON SHA-256:
+Final metadata file size: 1,740 bytes. SHA-256:
 `36cc5843ee29e5ad8c449c75575af3c5ecc3432cbbb8a5da8ed112396864f0bf`
 
-These digests differ. The previously supplied metadata CID therefore does not identify the current final JSON bytes. A new CID must be obtained by uploading the final file linked in the project conversation. The raw-codec CID calculated from the final file is `bafkreibwzrmeh3rj4wwyyre4ovlvv46f5tbuglf3xcs5vdwrci4wqzhqx4`; a provider using a different UnixFS codec may return a different CID, so verify the retrieved bytes by SHA-256.
+The supplied CID matches the locally calculated CIDv1/raw representation of the finalized JSON bytes. Public gateway retrieval of the metadata has not yet been demonstrated.
 
 No contract address, transaction hash, valuation, independent audit or auction acceptance is represented as existing.
