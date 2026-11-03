@@ -23,7 +23,15 @@ Owner-supplied CID:
 
 `bafkreibwzrmeh3rj4wwyyre4ovlvv46f5tbuglf3xcs5vdwrci4wqzhqx4`
 
-The CID is CIDv1 Base32 with the raw codec and sha2-256 multihash. It exactly matches the raw CID calculated from the final 1,740-byte metadata JSON distributed as `GENESIS_ARCHIVE_001_metadata_1_FINAL.json` (SHA-256 `36cc5843ee29e5ad8c449c75575af3c5ecc3432cbbb8a5da8ed112396864f0bf`). The GitHub `metadata/1.json` is maintained to match that finalized JSON. The owner has supplied the CID, but a separate download of the metadata from a public gateway has not yet been shown; gateway availability remains to be checked.
+- CID version: CIDv1
+- Codec: raw
+- Hash: sha2-256
+- File size: 1,740 bytes
+- SHA-256: `36cc5843ee29e5ad8c449c75575af3c5ecc3432cbbb8a5da8ed112396864f0bf`
+
+The CID matches the raw CID calculated from the final JSON bytes distributed as `GENESIS_ARCHIVE_001_metadata_1_FINAL.json`. The GitHub `metadata/1.json` is maintained to match this finalized JSON.
+
+**Gateway status:** The project owner attempted to retrieve this CID from `gateway.pinata.cloud`; the gateway returned HTTP 404. Therefore, the CID is mathematically consistent with the file bytes, but the JSON is not currently confirmed retrievable from that Pinata gateway. The metadata object must be pinned/re-uploaded or its correct public gateway URL established before deployment.
 
 The metadata image URI is:
 
@@ -31,4 +39,4 @@ The metadata image URI is:
 
 ## Deployment gate
 
-Before deploying the contract, verify the metadata CID through a gateway and compare the downloaded file's SHA-256 with the final JSON hash above. Confirm both image and metadata URIs resolve consistently. IPFS content is public by default.
+Do not deploy the NFT contract until the metadata CID can be fetched from a public gateway and the downloaded bytes have the expected SHA-256. Confirm both image and metadata URIs resolve consistently. IPFS content is public by default.
