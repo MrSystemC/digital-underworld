@@ -1,8 +1,8 @@
 # Release Status — GENESIS ARCHIVE #001
 
 **Prepared:** 3 November 2026  
-**Version:** 1.3  
-**State:** artwork CID retrieved and hash-checked by project owner; final metadata CID supplied and matches locally calculated raw CID; not deployed; not minted; not listed.
+**Version:** 1.4  
+**State:** artwork CID retrieved and hash-checked by project owner; metadata CID matches calculated file CID but Pinata gateway returned HTTP 404; not deployed; not minted; not listed.
 
 | Work item | State |
 |---|---|
@@ -10,9 +10,10 @@
 | Artwork SHA-256 recorded and checked against local master | Complete |
 | Artwork CID supplied by project owner | Received; CIDv1 Base32 syntax validated |
 | Artwork fetched from Pinata gateway | Owner reports successful download; SHA-256 matches master and provenance |
-| Final NFT metadata JSON | Finalized and available in release package and GitHub |
-| Metadata CID supplied by project owner | Received; matches calculated CIDv1/raw SHA-256 CID for the final JSON bytes |
-| Metadata gateway retrieval | Not yet independently shown; verify before deployment |
+| Final NFT metadata JSON | Finalized in release package and GitHub |
+| Metadata CID supplied by project owner | Matches calculated CIDv1/raw SHA-256 CID for final JSON bytes |
+| Metadata Pinata gateway retrieval | BLOCKED: owner screenshot shows HTTP 404 |
+| Metadata repin / gateway-domain check | Required before deployment |
 | ERC-721 / EIP-2981 contract source | Compiles locally; owner reports 19 Solidity files compiled |
 | Hardhat EVM tests | Owner reports 11 passing |
 | npm production dependency audit | 0 vulnerabilities reported by owner using `npm audit --omit=dev` |
@@ -44,6 +45,6 @@ CID: `bafkreibwzrmeh3rj4wwyyre4ovlvv46f5tbuglf3xcs5vdwrci4wqzhqx4`
 Final metadata file size: 1,740 bytes. SHA-256:
 `36cc5843ee29e5ad8c449c75575af3c5ecc3432cbbb8a5da8ed112396864f0bf`
 
-The supplied CID matches the locally calculated CIDv1/raw representation of the finalized JSON bytes. Public gateway retrieval of the metadata has not yet been demonstrated.
+The CID matches the locally calculated CIDv1/raw representation of the finalized JSON bytes. The owner then received HTTP 404 when retrieving it from Pinata's public gateway. Re-pin or confirm the correct gateway before any contract deployment.
 
 No contract address, transaction hash, valuation, independent audit or auction acceptance is represented as existing.
